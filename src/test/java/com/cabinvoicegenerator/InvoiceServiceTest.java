@@ -22,4 +22,20 @@ public class InvoiceServiceTest {
     public void givenLessDistanceAndTime_ShouldReturnMinFare() {
         assertEquals(5.0, invoiceGenerator.calculateFare(0.1, 1), 0.0);
     }
+
+    @Test
+    public void givenNoDistanceButLessTime_ShouldReturnMinFare() {
+        double distance = 0;
+        int timeInMins = 5;
+        double fare=invoiceGenerator.calculateFare(distance, timeInMins);
+        assertEquals(5.0, fare);
+    }
+
+    @Test
+    public void givenNoDistanceAndTime_ShouldAlsoReturnMinFare() {
+        double distance = 0;
+        int timeInMins = 0;
+        double fare=invoiceGenerator.calculateFare(distance, timeInMins);
+        assertEquals(5.0, fare);
+    }
 }

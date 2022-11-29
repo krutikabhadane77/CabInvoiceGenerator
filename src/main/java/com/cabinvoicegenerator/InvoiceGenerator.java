@@ -1,5 +1,4 @@
 package com.cabinvoicegenerator;
-
 public class InvoiceGenerator {
     public static final int costTime=1;
     public static final double costPerKilometer=10;
@@ -12,5 +11,14 @@ public class InvoiceGenerator {
             return minFare;
         }
         return totalFare;
+    }
+
+    public InvoiceSummary calculateFare(Rides[] rides) {
+        double totalFare=0;
+        for (Rides ride : rides)
+        {
+            totalFare=totalFare+this.calculateFare(ride.distance, ride.time);
+        }
+        return new InvoiceSummary(rides.length, totalFare);
     }
 }
