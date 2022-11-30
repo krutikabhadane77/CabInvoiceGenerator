@@ -1,32 +1,24 @@
 package com.cabinvoicegenerator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class InvoiceSummary {
-    public int noOfRides = 0;
-    public double fare=0;
-    public double avgFare=0;
+    public double noOfRides;
+    public double totalFare;
+    public double avgFare;
 
-    public InvoiceSummary(int noOfRides, double fare) {
-        this.noOfRides = noOfRides;
-        this.fare = fare;
-        try {
-            this.avgFare=fare/noOfRides;
-        }
-        catch (ArithmeticException exception) {
-            System.out.println("Cannot instantiate zero rides.");
-        }
+    public InvoiceSummary(int fare, double rides) {
+        this.noOfRides = rides;
+        this.totalFare = fare;
+        this.avgFare=this.totalFare/this.noOfRides;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        long temp;
-        temp = Double.doubleToLongBits(avgFare);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(fare);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        result = prime * result + noOfRides;
-        return result;
+    Map<Integer,InvoiceSummary>userId=new HashMap<>();
+    public Map<Integer,InvoiceSummary>getUserId(){
+        return userId;
+    }
+    public void setUserId(int id,InvoiceSummary summary){
+        this.userId=userId;
     }
 
     @Override
@@ -37,14 +29,8 @@ public class InvoiceSummary {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        InvoiceSummary other = (InvoiceSummary) obj;
-        if (Double.doubleToLongBits(avgFare) != Double.doubleToLongBits(other.avgFare))
-            return false;
-        if (Double.doubleToLongBits(fare) != Double.doubleToLongBits(other.fare))
-            return false;
-        if (noOfRides != other.noOfRides)
-            return false;
-        return true;
+        InvoiceSummary summary = (InvoiceSummary) obj;
+        return Double.compare(summary.noOfRides,noOfRides)==0 && totalFare==summary.totalFare && Double.compare(summary.avgFare,avgFare)==0;
     }
 }
 

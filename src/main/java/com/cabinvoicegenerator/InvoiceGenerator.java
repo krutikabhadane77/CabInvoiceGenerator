@@ -17,7 +17,7 @@ public class InvoiceGenerator {
         double totalFare=0;
         for (Rides ride : rides)
         {
-            totalFare=totalFare+this.calculateFare(ride.distance, ride.time);
+            totalFare+=this.calculateFare(ride.distance, ride.time);
         }
         return new InvoiceSummary(rides.length, totalFare);
     }
