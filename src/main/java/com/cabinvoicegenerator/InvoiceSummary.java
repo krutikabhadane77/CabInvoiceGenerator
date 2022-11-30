@@ -5,21 +5,14 @@ import java.util.Map;
 
 public class InvoiceSummary {
 
-    public double noOfRides;
+    public int noOfRides;
     public double totalFare;
     public double avgFare;
 
-    public InvoiceSummary(int fare, double rides) {
+    public InvoiceSummary(int rides, double fare) {
         this.noOfRides = rides;
         this.totalFare = fare;
-        this.avgFare=this.totalFare/this.noOfRides;
-    }
-    Map<Integer,InvoiceSummary>userId=new HashMap<>();
-    public Map<Integer,InvoiceSummary> getUserId(){
-        return userId;
-    }
-    public void setUserId(int id,InvoiceSummary summary){
-        this.userId=userId;
+        this.avgFare = this.totalFare/this.noOfRides;
     }
 
     @Override
@@ -31,6 +24,7 @@ public class InvoiceSummary {
         if (getClass() != obj.getClass())
             return false;
         InvoiceSummary summary = (InvoiceSummary) obj;
-        return Double.compare(summary.noOfRides,noOfRides)==0 && totalFare==summary.totalFare && Double.compare(summary.avgFare,avgFare)==0;
+        return Double.compare(summary.noOfRides,noOfRides) == 0 && totalFare == summary.totalFare
+                && Double.compare(summary.avgFare,avgFare) == 0;
     }
 }
